@@ -1,0 +1,14 @@
+---
+bin_dir: /opt/bin
+
+flannel_backend: "host-gw"
+flannel_vxlan_custom_config: true
+flannel_vxlan_vni: 4096
+flannel_vxlan_port: 4789
+flannel_ipv4pool_cidr: "{{ kubeadm_pod_subnet | default('10.244.0.0/16') }}"
+flannel_exec_dir: "{{ kubeadm_exec_dir | default('/root') }}"
+
+
+
+flannel_enable_win_ds: false
+win_flannel_interface: "Ethernet"

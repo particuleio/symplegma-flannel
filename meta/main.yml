@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: ArchiFleKs
+  description: Ansible role to bootstrap Flannel Networkwing
+  company: clusterfraks-dynamics
+  platforms:
+    - name: GenericLinux
+      version:
+        - any
+
+  license: Apache
+
+  min_ansible_version: 2.6
+
+  galaxy_tags: []
+
+dependencies: []
