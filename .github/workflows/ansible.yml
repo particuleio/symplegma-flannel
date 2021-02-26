@@ -1,0 +1,33 @@
+---
+name: 'symplegma-flannel'
+
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  linter:
+    name: "symplegma-flannel:linter"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: |
+          # FIXME: can not use ansible-lint==5.0.2 due to meta/main.yml
+          pip3 install ansible~=${{ secrets.ANSIBLE_VERSION }} yamllint ansible-lint==5.0.1
+
+      - name: Lint code.
+        run: |
+          yamllint .
+          ansible-lint
