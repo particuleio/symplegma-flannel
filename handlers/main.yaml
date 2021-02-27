@@ -2,7 +2,7 @@
 - name: Flannel | Apply Flannel manifest
   shell: |
     kubectl apply -f "{{ flannel_exec_dir }}"/kube-flannel.yaml
-  run_once: yes
+  run_once: true
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
   listen: "apply flannel manifest"
@@ -10,7 +10,7 @@
 - name: Flannel | Apply Win Flannel manifest
   shell: |
     kubectl apply -f "{{ flannel_exec_dir }}"/kube-flannel-win.yaml
-  run_once: yes
+  run_once: true
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
   listen: "apply win flannel manifest"

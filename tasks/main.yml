@@ -3,18 +3,21 @@
   file: 
     path: "{{ item }}" 
     state: directory
+    mode: "u+rw,g+r,o+r"
   with_items:
-  - "{{ flannel_exec_dir }}"
+    - "{{ flannel_exec_dir }}"
 
 - name: Flannel | Drop Flannel manifest
   template:
     src: kube-flannel.yaml.j2
+    mode: "u+rw,g+r,o+r"
     dest: "{{ flannel_exec_dir }}/kube-flannel.yaml"
   notify: "apply flannel manifest"
 
 - name: Flannel | Drop Win Flannel host-gw  manifest
   template:
     src: win-flannel-host-gw.yaml.j2
+    mode: "u+rw,g+r,o+r"
     dest: "{{ flannel_exec_dir }}/kube-flannel-win.yaml"
   notify: "apply win flannel manifest"
   when: flannel_backend == "host-gw" and (flannel_enable_win_ds | bool)
@@ -22,6 +25,7 @@
 - name: Flannel | Drop Win Flannel overlay manifest
   template:
     src: win-flannel-overlay.yaml.j2
+    mode: "u+rw,g+r,o+r"
     dest: "{{ flannel_exec_dir }}/kube-flannel-win.yaml"
   notify: "apply win flannel manifest"
   when: flannel_backend == "vxlan" and (flannel_enable_win_ds | bool)
