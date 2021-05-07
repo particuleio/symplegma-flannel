@@ -2,6 +2,8 @@
 name: 'symplegma-flannel'
 
 'on':
+  schedule:
+    - cron: '0 7 * * 1'  # every monday at 7am
   push:
     branches:
       - main
@@ -25,7 +27,7 @@ jobs:
       - name: Install test dependencies.
         run: |
           # FIXME: can not use ansible-lint==5.0.2 due to meta/main.yml
-          pip3 install ansible~=${{ secrets.ANSIBLE_VERSION }} yamllint ansible-lint==5.0.1
+          pip3 install ansible yamllint ansible-lint==5.0.1
 
       - name: Lint code.
         run: |
