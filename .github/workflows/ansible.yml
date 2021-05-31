@@ -26,8 +26,7 @@ jobs:
 
       - name: Install test dependencies.
         run: |
-          # FIXME: can not use ansible-lint==5.0.2 due to meta/main.yml
-          pip3 install ansible yamllint ansible-lint==5.0.1
+          pip3 install ansible yamllint ansible-lint
 
       - name: Lint code.
         run: |
