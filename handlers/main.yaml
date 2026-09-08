@@ -1,16 +1,10 @@
 ---
 - name: Flannel | Apply Flannel manifest
-  shell: |
-    kubectl apply -f "{{ flannel_exec_dir }}"/kube-flannel.yaml
+  ansible.builtin.shell: |
+    {{ bin_dir }}/kubectl apply -f "{{ flannel_exec_dir }}"/kube-flannel.yaml
+  register: flannel_apply
+  changed_when: "'created' in flannel_apply.stdout or 'configured' in flannel_apply.stdout"
   run_once: true
   environment:
     KUBECONFIG: /etc/kubernetes/admin.conf
   listen: "apply flannel manifest"
-
-- name: Flannel | Apply Win Flannel manifest
-  shell: |
-    kubectl apply -f "{{ flannel_exec_dir }}"/kube-flannel-win.yaml
-  run_once: true
-  environment:
-    KUBECONFIG: /etc/kubernetes/admin.conf
-  listen: "apply win flannel manifest"
